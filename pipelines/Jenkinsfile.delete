@@ -1,0 +1,8 @@
+node {
+
+  stage 'DELETE OLD SNAPSHOTS'
+  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "jenkins.${env.ENV}"]]) {
+    sh "../EC2-DELETE-SNAPSHOTS@script/dsl-pipelines/ec2-snapshot/scripts/delete-ec2-snapshots.sh ${env.REGION} ${env.RETAIN} ${env.VOLUME_ID}"
+  }
+
+}

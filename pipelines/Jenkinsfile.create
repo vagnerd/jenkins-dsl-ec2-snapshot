@@ -1,0 +1,8 @@
+node {
+
+  stage 'Create EC2 SNAPSHOT'
+  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "jenkins.${env.ENV}"]]) {
+    sh "aws --region us-east-1 ec2 create-snapshot --volume-id ${env.VOLUME_ID}"
+  }
+
+}
